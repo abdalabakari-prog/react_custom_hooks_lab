@@ -6,15 +6,15 @@ export function useLocalStorage(key, initialValue = null) {
     // Try to get the value from localStorage
     const storedValue = localStorage.getItem(key);
     
-    // If there's a stored value, parse and return it
+    // If there's a stored value, return it directly (no JSON.parse)
     // Otherwise, return the initialValue
-    return storedValue !== null ? JSON.parse(storedValue) : initialValue;
+    return storedValue !== null ? storedValue : initialValue;
   });
 
   // Update localStorage whenever state or key changes
   useEffect(() => {
-    // Save the current state to localStorage
-    localStorage.setItem(key, JSON.stringify(state));
+    // Save the current state to localStorage (no JSON.stringify)
+    localStorage.setItem(key, state);
   }, [key, state]);
 
   // Return the state and setState function (just like useState)
